@@ -43,7 +43,7 @@ const Login = () => {
               disabled={isLoading}
               type="submit"
             >
-              {isLoading ? "Please wait..." : "Login"}
+              {isLoading ? "loading..." : "Login"}
             </button>
             <p className="mt-5 mb-3 text-body-secondary">© 2023</p>
           </form>
