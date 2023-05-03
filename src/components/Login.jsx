@@ -2,7 +2,7 @@ import { useState } from "react";
 import { logo } from "../constants";
 import { Input } from "../ui";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUserStart } from "../slice/auth";
+import { loginUserStart } from "../slice/authSlice";
 
 const Login = () => {
   const [email, setEmail] = useState("");

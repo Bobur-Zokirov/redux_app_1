@@ -2,20 +2,32 @@ import { useState } from "react";
 import { logo } from "../constants";
 import { Input } from "../ui";
 import { useDispatch, useSelector } from "react-redux";
-import { registerUserStart } from "../slice/auth";
+import {
+  registerUserFailure,
+  registerUserStart,
+  registerUserSuccess,
+} from "../slice/authSlice";
+import AuthService from "../service/authServise";
 
 const Register = () => {
-  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
   const { isLoading } = useSelector((state) => state.auth);
 
-  function registerHandler(e) {
+  const registerHandler = async (e) => {
     e.preventDefault();
     dispatch(registerUserStart());
-  }
+    const user = { username, email, password };
+    try {
+      const response = await AuthService.userRegister(user);
+      dispatch(registerUserSuccess());
+    } catch (error) {
+      dispatch(registerUserFailure());
+    }
+  };
 
   return (
     <div className="text-center mt-5">
@@ -26,8 +38,8 @@ const Register = () => {
 
           <Input
             label="Username"
-            state={name}
-            setState={setName}
+            state={username}
+            setState={setUsername}
             type="text"
             name="username"
           />
@@ -53,7 +65,9 @@ const Register = () => {
           >
             {isLoading ? "Please wait..." : "Register"}
           </button>
-          <p className="mt-5 mb-3 text-body-secondary">© 2023</p>
+          <p className="mt-5 mb-3 text-body-secondary">
+            © 2023 All rights reserved
+          </p>
         </form>
       </main>
     </div>

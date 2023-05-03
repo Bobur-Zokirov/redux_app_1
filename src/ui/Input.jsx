@@ -7,6 +7,7 @@ const Input = ({ label, state, setState, type, name }) => {
         className="form-control"
         // id="floatingInput"
         autoComplete="true"
+        required
         placeholder={label}
         value={state}
         onChange={(e) => setState(e.target.value)}
