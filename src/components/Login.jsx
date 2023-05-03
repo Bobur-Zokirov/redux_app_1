@@ -2,7 +2,12 @@ import { useState } from "react";
 import { logo } from "../constants";
 import { Input } from "../ui";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUserStart } from "../slice/authSlice";
+import {
+  signUserFailure,
+  signUserStart,
+  signUserSuccess,
+} from "../slice/authSlice";
+import AuthService from "../service/authServise";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -10,10 +15,17 @@ const Login = () => {
   const dispatch = useDispatch();
   const { isLoading } = useSelector((state) => state.auth);
 
-  function loginHandler(e) {
+  const loginHandler = async (e) => {
     e.preventDefault();
-    dispatch(loginUserStart());
-  }
+    dispatch(signUserStart());
+    const user = { email, password };
+    try {
+      const response = await AuthService.userLogin(user);
+      dispatch(signUserSuccess(response.data.user));
+    } catch (error) {
+      dispatch(signUserFailure(error.response.data.errors));
+    }
+  };
   return (
     <div>
       <div className="text-center mt-5">
