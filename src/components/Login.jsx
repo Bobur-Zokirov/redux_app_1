@@ -27,7 +27,7 @@ const Login = () => {
     }
   };
   return (
-    <div>
+    <div className="container">
       <div className="text-center mt-5">
         <main className="form-signin w-25 m-auto">
           <form>
@@ -57,7 +57,9 @@ const Login = () => {
             >
               {isLoading ? "loading..." : "Login"}
             </button>
-            <p className="mt-5 mb-3 text-body-secondary">© 2023</p>
+            <p className="mt-5 mb-3 text-body-secondary">
+              © 2023 All rights reserved
+            </p>
           </form>
         </main>
       </div>

@@ -30,7 +30,7 @@ const Register = () => {
   };
 
   return (
-    <div className="text-center mt-5">
+    <div className="text-center mt-5 container">
       <main className="form-signin w-25 m-auto">
         <form>
           <img className="mb-4" src={logo} alt="" width="72" height="57" />
