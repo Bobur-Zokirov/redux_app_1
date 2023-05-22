@@ -9,6 +9,7 @@ import {
 } from "../slice/authSlice";
 import AuthService from "../service/authServise";
 import { useNavigate } from "react-router-dom";
+import { ValidationError } from "./";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -28,7 +29,7 @@ const Register = () => {
       dispatch(signUserSuccess(response.data.user));
       navigate("/");
     } catch (error) {
-      dispatch(signUserFailure(error.response.data.errors));
+      dispatch(signUserFailure(error?.response?.data?.errors));
     }
   };
 
@@ -36,7 +37,7 @@ const Register = () => {
     if (loggedIn) {
       navigate("/");
     }
-  }, []);
+  }, [loggedIn]);
 
   return (
     <div className="text-center mt-5 container">
@@ -44,9 +45,11 @@ const Register = () => {
         <form>
           <img className="mb-4" src={logo} alt="" width="72" height="57" />
           <h1 className="h3 mb-3 fw-normal">Please register</h1>
+          <ValidationError />
 
           <Input
             label="Username"
+            id={"registerUsername"}
             state={username}
             setState={setUsername}
             type="text"
@@ -54,6 +57,7 @@ const Register = () => {
           />
           <Input
             label="Email address"
+            id={"registerEmail"}
             state={email}
             setState={setEmail}
             type="email"
@@ -61,6 +65,7 @@ const Register = () => {
           />
           <Input
             label="Password"
+            id={"registerPassword"}
             state={password}
             setState={setPassword}
             type="password"

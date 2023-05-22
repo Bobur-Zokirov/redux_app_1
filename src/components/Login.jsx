@@ -9,6 +9,7 @@ import {
 } from "../slice/authSlice";
 import AuthService from "../service/authServise";
 import { useNavigate } from "react-router-dom";
+import { ValidationError } from "./";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -27,7 +28,7 @@ const Login = () => {
       dispatch(signUserSuccess(response.data.user));
       navigate("/");
     } catch (error) {
-      dispatch(signUserFailure(error.response.data.errors));
+      dispatch(signUserFailure(error?.response?.data?.errors));
     }
   };
 
@@ -35,7 +36,7 @@ const Login = () => {
     if (loggedIn) {
       navigate("/");
     }
-  }, []);
+  }, [loggedIn]);
 
   return (
     <div className="container">
@@ -44,9 +45,11 @@ const Login = () => {
           <form>
             <img className="mb-4" src={logo} alt="" width="72" height="57" />
             <h1 className="h3 mb-3 fw-normal">Please login</h1>
+            <ValidationError />
 
             <Input
               label="Email address"
+              id={"loginEmail"}
               state={email}
               setState={setEmail}
               type="email"
@@ -54,6 +57,7 @@ const Login = () => {
             />
             <Input
               label="Password"
+              id={"loginPassword"}
               state={password}
               setState={setPassword}
               type="password"
