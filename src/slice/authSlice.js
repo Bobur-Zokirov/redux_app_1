@@ -31,10 +31,14 @@ export const authSlice = createSlice({
       state.user = null;
       state.error = action.payload;
     },
+    logoutUser: (state) => {
+      state.user = null;
+      state.loggedIn = false;
+    },
   },
 });
 
-export const { signUserStart, signUserSuccess, signUserFailure } =
+export const { signUserStart, signUserSuccess, signUserFailure, logoutUser } =
   authSlice.actions;
 
 export default authSlice.reducer;
