@@ -8,6 +8,7 @@ import { signUserSuccess } from "./slice/authSlice";
 
 export const App = () => {
   const dispatch = useDispatch();
+
   const getUserByToken = async () => {
     try {
       const response = await AuthService.getUser();
@@ -18,6 +19,7 @@ export const App = () => {
   };
 
   const token = getItem("token");
+
   useEffect(() => {
     if (token) {
       getUserByToken();

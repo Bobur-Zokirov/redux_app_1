@@ -12,7 +12,7 @@ const Navbar = () => {
   const logoutHandler = () => {
     removeItem("token");
     dispatch(logoutUser());
-    navigate("/");
+    navigate("/login");
   };
 
   return (
