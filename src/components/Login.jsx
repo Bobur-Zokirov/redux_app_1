@@ -70,7 +70,18 @@ const Login = () => {
               disabled={isLoading}
               type="submit"
             >
-              {isLoading ? "loading..." : "Login"}
+              {isLoading ? (
+                <>
+                  <span
+                    className="spinner-grow spinner-grow-sm mr-3"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                  loading...
+                </>
+              ) : (
+                "Login"
+              )}
             </button>
             <p className="mt-5 mb-3 text-body-secondary">
               © 2023 All rights reserved

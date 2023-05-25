@@ -77,7 +77,18 @@ const Register = () => {
             disabled={isLoading}
             type="submit"
           >
-            {isLoading ? "Please wait..." : "Register"}
+            {isLoading ? (
+              <>
+                <span
+                  className="spinner-grow spinner-grow-sm mr-3"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+                Please wait...
+              </>
+            ) : (
+              "Register"
+            )}
           </button>
           <p className="mt-5 mb-3 text-body-secondary">
             © 2023 All rights reserved
