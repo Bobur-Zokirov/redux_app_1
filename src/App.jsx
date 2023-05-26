@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { Login, Main, Navbar, Register } from "./components";
+import { ArticleDeatil, Login, Main, Navbar, Register } from "./components";
 import { useEffect } from "react";
 import AuthService from "./service/authServise";
 import ArticleService from "./service/articleService";
@@ -23,8 +23,8 @@ export const App = () => {
   const articlesHandler = async () => {
     dispatch(getArticlesStart());
     try {
-      const response = await ArticleService.getArticles();
-      dispatch(getArticlesSuccess(response.data.articles));
+      const data = await ArticleService.getArticles();
+      dispatch(getArticlesSuccess(data.articles));
     } catch (error) {
       console.log(error);
     }
@@ -46,6 +46,7 @@ export const App = () => {
         <Route path="/" element={<Main />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/article/:id" element={<ArticleDeatil />} />
       </Routes>
     </div>
   );

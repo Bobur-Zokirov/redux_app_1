@@ -1,8 +1,11 @@
 import { useSelector } from "react-redux";
 import { Loader } from "../ui";
+import { useNavigate } from "react-router-dom";
 
 const Main = () => {
   const { isLoading, articles } = useSelector((state) => state.article);
+
+  const navigate = useNavigate();
 
   return (
     <>
@@ -29,6 +32,7 @@ const Main = () => {
                   <div className="d-flex justify-content-between align-items-center card-footer">
                     <div className="btn-group">
                       <button
+                        onClick={() => navigate(`/article/${article.slug}`)}
                         type="button"
                         className="btn btn-sm btn-outline-success"
                       >
