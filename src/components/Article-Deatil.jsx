@@ -28,7 +28,24 @@ const ArticleDeatil = () => {
     getArticleDetail();
   }, [id]);
   return (
-    <div>{isLoading ? <Loader /> : <div>{articleDetail?.title}</div>}</div>
+    <div>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div>
+          <div>
+            <h5>Author: {articleDetail?.author?.username}</h5>
+            {articleDetail?.title}
+          </div>
+          <div>
+            <h5>Description:</h5> {articleDetail?.description}
+          </div>
+          <div>
+            <h5>Body:</h5> {articleDetail?.body}
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
 

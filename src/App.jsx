@@ -1,5 +1,12 @@
 import { Routes, Route } from "react-router-dom";
-import { ArticleDeatil, Login, Main, Navbar, Register } from "./components";
+import {
+  ArticleDeatil,
+  CreateArticle,
+  Login,
+  Main,
+  Navbar,
+  Register,
+} from "./components";
 import { useEffect } from "react";
 import AuthService from "./service/authServise";
 import ArticleService from "./service/articleService";
@@ -20,23 +27,12 @@ export const App = () => {
     }
   };
 
-  const articlesHandler = async () => {
-    dispatch(getArticlesStart());
-    try {
-      const data = await ArticleService.getArticles();
-      dispatch(getArticlesSuccess(data.articles));
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const token = getItem("token");
 
   useEffect(() => {
     if (token) {
       getUserByToken();
     }
-    articlesHandler();
   }, [token]);
 
   return (
@@ -47,6 +43,7 @@ export const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/article/:id" element={<ArticleDeatil />} />
+        <Route path="/create-article" element={<CreateArticle />} />
       </Routes>
     </div>
   );
