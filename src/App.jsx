@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import {
   ArticleDeatil,
   CreateArticle,
+  EditArticle,
   Login,
   Main,
   Navbar,
@@ -9,11 +10,9 @@ import {
 } from "./components";
 import { useEffect } from "react";
 import AuthService from "./service/authServise";
-import ArticleService from "./service/articleService";
 import { getItem } from "./helpers/persistence-storage";
 import { useDispatch } from "react-redux";
 import { signUserSuccess } from "./slice/authSlice";
-import { getArticlesStart, getArticlesSuccess } from "./slice/articleSlice";
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -42,8 +41,9 @@ export const App = () => {
         <Route path="/" element={<Main />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/article/:id" element={<ArticleDeatil />} />
+        <Route path="/article/:slug" element={<ArticleDeatil />} />
         <Route path="/create-article" element={<CreateArticle />} />
+        <Route path="/edit-article/:slug" element={<EditArticle />} />
       </Routes>
     </div>
   );

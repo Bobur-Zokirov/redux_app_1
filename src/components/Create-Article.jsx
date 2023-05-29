@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Input, TextArea } from "../ui";
 import ArticleService from "../service/articleService";
 import { useNavigate } from "react-router-dom";
 import ArticleForm from "./Article-Form";
@@ -11,12 +10,11 @@ const CreateArticle = () => {
 
   const navigate = useNavigate();
 
-  const postArticle = async (e) => {
+  const formSubmit = async (e) => {
     e.preventDefault();
     const article = { title, description, body };
     try {
       const response = await ArticleService.postArticle(article);
-      console.log(response.article);
       navigate("/");
     } catch (error) {
       console.log("error posting article");
@@ -24,13 +22,14 @@ const CreateArticle = () => {
   };
 
   const formProps = {
+    actionName: "Create",
     title,
     setTitle,
     description,
     setDescription,
     body,
     setBody,
-    postArticle,
+    formSubmit,
   };
 
   return (

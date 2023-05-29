@@ -2,16 +2,17 @@ import { Input, TextArea } from "../ui";
 
 const ArticleForm = (props) => {
   const {
+    actionName,
     title,
     setTitle,
     description,
     setDescription,
     body,
     setBody,
-    postArticle,
+    formSubmit,
   } = props;
   return (
-    <form onSubmit={postArticle}>
+    <form onSubmit={formSubmit}>
       <Input
         type="text"
         label="Title"
@@ -38,7 +39,7 @@ const ArticleForm = (props) => {
         setState={setBody}
       />
       <button className="w-100 btn btn-lg btn-primary" type="submit">
-        Create
+        {actionName}
       </button>
     </form>
   );

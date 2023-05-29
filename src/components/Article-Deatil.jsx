@@ -11,13 +11,13 @@ import { Loader } from "../ui";
 
 const ArticleDeatil = () => {
   const { articleDetail, isLoading } = useSelector((state) => state.article);
-  const { id } = useParams();
+  const { slug } = useParams();
   const dispatch = useDispatch();
 
   const getArticleDetail = async () => {
     dispatch(getArticleDetailStart());
     try {
-      const data = await ArticleService.getArticleDetail(id);
+      const data = await ArticleService.getArticleDetail(slug);
       dispatch(getArticleDetailSuccess(data.article));
     } catch (error) {
       dispatch(getArticleDetailFailure());
@@ -26,7 +26,7 @@ const ArticleDeatil = () => {
   };
   useEffect(() => {
     getArticleDetail();
-  }, [id]);
+  }, [slug]);
   return (
     <div>
       {isLoading ? (
