@@ -7,6 +7,7 @@ import { getArticlesStart, getArticlesSuccess } from "../slice/articleSlice";
 
 const Main = () => {
   const { isLoading, articles } = useSelector((state) => state.article);
+  const { loggedIn, user } = useSelector((state) => state.auth);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -16,6 +17,15 @@ const Main = () => {
     try {
       const data = await ArticleService.getArticles();
       dispatch(getArticlesSuccess(data.articles));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const deleteArticle = async (slug) => {
+    try {
+      await ArticleService.deleteArticle(slug);
+      articlesHandler();
     } catch (error) {
       console.log(error);
     }
@@ -56,18 +66,24 @@ const Main = () => {
                       >
                         View
                       </button>
-                      <button
-                        type="button"
-                        className="btn btn-sm btn-outline-secondary"
-                      >
-                        Edit
-                      </button>
-                      <button
-                        type="button"
-                        className="btn btn-sm btn-outline-danger"
-                      >
-                        Delete
-                      </button>
+                      {loggedIn &&
+                        user.username === article.author.username && (
+                          <>
+                            <button
+                              type="button"
+                              className="btn btn-sm btn-outline-secondary"
+                            >
+                              Edit
+                            </button>
+                            <button
+                              type="button"
+                              className="btn btn-sm btn-outline-danger"
+                              onClick={() => deleteArticle(article.slug)}
+                            >
+                              Delete
+                            </button>
+                          </>
+                        )}
                     </div>
                     <small className="text-capitalize fw-bold">
                       {article.author.username}

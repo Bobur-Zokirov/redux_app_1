@@ -15,7 +15,8 @@ const CreateArticle = () => {
     e.preventDefault();
     const article = { title, description, body };
     try {
-      await ArticleService.postArticle(article);
+      const response = await ArticleService.postArticle(article);
+      console.log(response.article);
       navigate("/");
     } catch (error) {
       console.log("error posting article");
